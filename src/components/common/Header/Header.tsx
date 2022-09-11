@@ -45,9 +45,9 @@ export default function Header() {
 
       {/* icons + avatar*/}
       <div className="flex items-center space-x-4 text-sm font-light">
-        <BsSearch className="hidden h-6 w-6 sm:inline" />
-        <p className="hidden lg:inline">Kids</p>
-        <BsFillBellFill className="h-6 w-6" />
+        <BsSearch className="hidden h-6 w-6 cursor-pointer sm:inline" />
+        <p className="hidden cursor-pointer lg:inline">Kids</p>
+        <BsFillBellFill className="h-6 w-6 cursor-pointer" />
         <Link href={"/account"}>
           <img
             src="/avatar.png"
