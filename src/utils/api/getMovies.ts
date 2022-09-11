@@ -43,6 +43,7 @@ export const getMovies = async () => {
 };
 
 export interface Movie {
+  adult: boolean;
   title: string;
   backdrop_path: string;
   media_type?: string;
@@ -54,9 +55,11 @@ export interface Movie {
   origin_country: string[];
   original_language: string;
   original_name: string;
+  original_title: string;
   overview: string;
   popularity: number;
   poster_path: string;
   vote_average: number;
   vote_count: number;
+  video: boolean;
 }
