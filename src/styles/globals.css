@@ -4,7 +4,17 @@
 
 @layer base {
   body {
-    @apply bg-[#141414] text-white;
+    @apply overflow-x-hidden bg-[#141414] text-white;
+  }
+
+  ::-webkit-scrollbar {
+    @apply w-2 bg-transparent;
+  }
+  ::-webkit-scrollbar-track {
+    @apply bg-transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    @apply rounded-full bg-red-600;
   }
 }
 
@@ -15,5 +25,11 @@
 
   .bannerBtn {
     @apply flex items-center gap-x-2 rounded px-5 py-1.5 text-sm font-semibold transition hover:opacity-75 md:py-2.5 md:px-8 md:text-xl;
+  }
+
+  .hideScrollbar::-webkit-scrollbar {
+    display: none;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
   }
 }
