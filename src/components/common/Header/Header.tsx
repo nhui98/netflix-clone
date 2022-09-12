@@ -2,9 +2,11 @@ import { NAV_LINKS } from "./Header.data";
 import { BsSearch, BsFillBellFill } from "react-icons/bs";
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import { useAuth } from "@hooks/useAuth";
 
 export default function Header() {
   const [isScrolled, setScrolled] = useState(false);
+  const { logout } = useAuth();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -48,13 +50,14 @@ export default function Header() {
         <BsSearch className="hidden h-6 w-6 cursor-pointer sm:inline" />
         <p className="hidden cursor-pointer lg:inline">Kids</p>
         <BsFillBellFill className="h-6 w-6 cursor-pointer" />
-        <Link href={"/account"}>
-          <img
-            src="/avatar.png"
-            alt="avatar"
-            className="cursor-pointer rounded"
-          />
-        </Link>
+        {/* <Link href={"/account"}> */}
+        <img
+          src="/avatar.png"
+          alt="avatar"
+          className="cursor-pointer rounded"
+          onClick={logout}
+        />
+        {/* </Link> */}
       </div>
     </header>
   );

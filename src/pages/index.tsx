@@ -1,6 +1,8 @@
 import Header from "@components/common/Header/Header";
+import Spinner from "@components/common/Spinner/Spinner";
 import Banner from "@components/home/Banner/Banner";
 import Row from "@components/home/Row/Row";
+import { useAuth } from "@hooks/useAuth";
 import { getMovies, Movie } from "@utils/api/getMovies";
 import type { GetServerSideProps, NextPage } from "next";
 import Head from "next/head";
@@ -26,6 +28,10 @@ const Home: NextPage<HomeProps> = ({
   romanceMovies,
   documentaries,
 }) => {
+  const { loading } = useAuth();
+
+  if (loading) return <Spinner />;
+
   return (
     <div className="relative h-screen bg-gradient-to-b from-gray-900/10 to-[#010511] lg:h-[140vh]">
       <Head>
