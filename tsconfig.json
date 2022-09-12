@@ -21,6 +21,7 @@
       "@constants/*": ["src/constants/*"],
       "@firebase/*": ["src/firebase/*"],
       "@hooks/*": ["src/hooks/*"],
+      "@zustand/*": ["src/zustand/*"],
       "@styles/*": ["src/styles/*"]
     }
   },
