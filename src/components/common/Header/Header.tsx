@@ -21,11 +21,7 @@ export default function Header() {
   }, []);
 
   return (
-    <header
-      className={`py4 fixed top-0 z-50 flex w-full items-center justify-between px-4 py-4 transition-all duration-200 lg:px-10 lg:py-6 ${
-        isScrolled && "bg-[#141414]"
-      }`}
-    >
+    <header className={`header ${isScrolled && "bg-[#141414]"}`}>
       <div className="flex items-center space-x-2 md:space-x-10">
         <img
           src="/netflix-logo.svg"

@@ -40,4 +40,8 @@
   .modalButton {
     @apply flex h-11 w-11 items-center justify-center rounded-full border-2 border-[gray] bg-[#2a2a2a]/60 transition hover:border-white hover:bg-white/10;
   }
+
+  .header {
+    @apply fixed top-0 z-50 flex w-full items-center justify-between py-4 px-4 transition-all duration-200 lg:px-10 lg:py-6;
+  }
 }
