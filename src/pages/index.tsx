@@ -1,4 +1,5 @@
 import Header from "@components/common/Header/Header";
+import Modal from "@components/common/Modal/Modal";
 import Spinner from "@components/common/Spinner/Spinner";
 import Banner from "@components/home/Banner/Banner";
 import Row from "@components/home/Row/Row";
@@ -52,6 +53,7 @@ const Home: NextPage<HomeProps> = ({
           <Row title="Documentaries" movies={documentaries} />
         </section>
       </main>
+      <Modal />
     </div>
   );
 };

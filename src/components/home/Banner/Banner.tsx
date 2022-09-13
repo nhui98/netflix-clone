@@ -1,9 +1,10 @@
 import { baseURL } from "@constants/movie";
 import { Movie } from "@utils/api/getMovies";
+import useStore from "@zustand/store";
 import { NextPage } from "next";
 import Image from "next/image";
 import { useEffect, useState } from "react";
-import { FaPlay, FaInfoCircle } from "react-icons/fa";
+import { FaInfoCircle, FaPlay } from "react-icons/fa";
 
 export interface BannerProps {
   netflixOriginals: Movie[];
@@ -11,12 +12,19 @@ export interface BannerProps {
 
 const Banner: NextPage<BannerProps> = ({ netflixOriginals }) => {
   const [movie, setMovie] = useState<Movie | null>(null);
+  const setShowModal = useStore((state) => state.setShowModal);
+  const setCurrentMovie = useStore((state) => state.setCurrentMovie);
 
   useEffect(() => {
     setMovie(
       netflixOriginals[Math.floor(Math.random() * netflixOriginals.length)]
     );
   }, [netflixOriginals]);
+
+  const toggleModal = () => {
+    if (movie) setCurrentMovie(movie);
+    setShowModal(true);
+  };
 
   return (
     <div className="flex flex-col space-y-2 py-16 md:space-y-4 lg:h-[65vh] lg:justify-end lg:pb-12">
@@ -41,7 +49,7 @@ const Banner: NextPage<BannerProps> = ({ netflixOriginals }) => {
           <FaPlay className="h-4 w-4 text-black md:h-7 md:w-7" />
           Play
         </button>
-        <button className="bannerBtn bg-[gray]/70">
+        <button className="bannerBtn bg-[gray]/70" onClick={toggleModal}>
           More Info <FaInfoCircle className="h-5 w-5 md:h-8 md:w-8" />
         </button>
       </div>
