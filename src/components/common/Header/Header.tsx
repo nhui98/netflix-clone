@@ -1,8 +1,8 @@
-import { NAV_LINKS } from "./Header.data";
-import { BsSearch, BsFillBellFill } from "react-icons/bs";
-import Link from "next/link";
-import { useEffect, useState } from "react";
 import { useAuth } from "@hooks/useAuth";
+import { useEffect, useState } from "react";
+import { BsFillBellFill, BsSearch } from "react-icons/bs";
+
+import { NAV_LINKS } from "./Header.data";
 
 export default function Header() {
   const [isScrolled, setScrolled] = useState(false);
@@ -26,7 +26,6 @@ export default function Header() {
         isScrolled && "bg-[#141414]"
       }`}
     >
-      {/* logo + links */}
       <div className="flex items-center space-x-2 md:space-x-10">
         <img
           src="/netflix-logo.svg"
@@ -45,19 +44,16 @@ export default function Header() {
         </ul>
       </div>
 
-      {/* icons + avatar*/}
       <div className="flex items-center space-x-4 text-sm font-light">
         <BsSearch className="hidden h-6 w-6 cursor-pointer sm:inline" />
         <p className="hidden cursor-pointer lg:inline">Kids</p>
         <BsFillBellFill className="h-6 w-6 cursor-pointer" />
-        {/* <Link href={"/account"}> */}
         <img
           src="/avatar.png"
           alt="avatar"
           className="cursor-pointer rounded"
           onClick={logout}
         />
-        {/* </Link> */}
       </div>
     </header>
   );

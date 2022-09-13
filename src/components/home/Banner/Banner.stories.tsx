@@ -1,5 +1,7 @@
 import { ComponentMeta, ComponentStory } from "@storybook/react";
-import Banner, { BannerProps } from "./Banner";
+import { BannerProps } from "src/types";
+
+import Banner from "./Banner";
 import { BannerMockProps } from "./Banner.mock";
 
 export default {

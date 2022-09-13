@@ -1,14 +1,10 @@
 import { baseURL } from "@constants/movie";
-import { Movie } from "@utils/api/getMovies";
 import useStore from "@zustand/store";
 import { NextPage } from "next";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { FaInfoCircle, FaPlay } from "react-icons/fa";
-
-export interface BannerProps {
-  netflixOriginals: Movie[];
-}
+import { BannerProps, Movie } from "src/types";
 
 const Banner: NextPage<BannerProps> = ({ netflixOriginals }) => {
   const [movie, setMovie] = useState<Movie | null>(null);

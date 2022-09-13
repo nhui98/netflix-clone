@@ -1,4 +1,4 @@
-import { Movie } from "@utils/api/getMovies";
+import { Movie } from "src/types";
 
 export const BannerMockProps: Movie[] = [
   {

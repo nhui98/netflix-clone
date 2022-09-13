@@ -1,6 +1,5 @@
-import { Movie } from "@utils/api/getMovies";
+import { Movie } from "src/types";
 import create from "zustand";
-import { devtools } from "zustand/middleware";
 
 interface StoreState {
   showModal: boolean;

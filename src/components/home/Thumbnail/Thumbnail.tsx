@@ -1,11 +1,7 @@
-import { Movie } from "@utils/api/getMovies";
 import useStore from "@zustand/store";
 import { NextPage } from "next";
 import Image from "next/image";
-
-export interface ThumbnailProps {
-  movie: Movie;
-}
+import { ThumbnailProps } from "src/types";
 
 const Thumbnail: NextPage<ThumbnailProps> = ({ movie }) => {
   const { backdrop_path, poster_path, name } = movie;

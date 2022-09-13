@@ -1,5 +1,7 @@
-import { ComponentStory, ComponentMeta } from "@storybook/react";
-import Thumbnail, { ThumbnailProps } from "./Thumbnail";
+import { ComponentMeta, ComponentStory } from "@storybook/react";
+import { ThumbnailProps } from "src/types";
+
+import Thumbnail from "./Thumbnail";
 import { ThumbnailMockProps } from "./Thumbnail.mock";
 
 export default {

@@ -1,4 +1,4 @@
-import { useState, useEffect, useContext, createContext, useMemo } from "react";
+import { auth } from "@firebase/firebase";
 import {
   createUserWithEmailAndPassword,
   onAuthStateChanged,
@@ -7,9 +7,9 @@ import {
   User,
 } from "firebase/auth";
 import { useRouter } from "next/router";
-import { auth } from "@firebase/firebase";
+import { createContext, useContext, useEffect, useMemo, useState } from "react";
 
-interface IAuth {
+export interface IAuth {
   user: User | null;
   signUp: (email: string, password: string) => Promise<void>;
   signIn: (email: string, password: string) => Promise<void>;

@@ -1,4 +1,4 @@
-import { Movie } from "./getMovies";
+import { Movie } from "src/types";
 
 export const getMovie = async (movie: Movie) => {
   try {

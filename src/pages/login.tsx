@@ -4,12 +4,8 @@ import { NextPage } from "next";
 import Head from "next/head";
 import Image from "next/image";
 import { useState } from "react";
-import { useForm, SubmitHandler } from "react-hook-form";
-
-interface Inputs {
-  email: string;
-  password: string;
-}
+import { SubmitHandler, useForm } from "react-hook-form";
+import { Inputs } from "src/types";
 
 const Login: NextPage = () => {
   const [login, setLogin] = useState(false);
@@ -18,7 +14,6 @@ const Login: NextPage = () => {
   const {
     register,
     handleSubmit,
-    watch,
     formState: { errors },
   } = useForm<Inputs>();
 

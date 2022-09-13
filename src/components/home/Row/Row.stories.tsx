@@ -1,5 +1,7 @@
-import { ComponentStory, ComponentMeta } from "@storybook/react";
-import Row, { RowProps } from "./Row";
+import { ComponentMeta, ComponentStory } from "@storybook/react";
+import { RowProps } from "src/types";
+
+import Row from "./Row";
 import { RowMockProps } from "./Row.mock";
 
 export default {

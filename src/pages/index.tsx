@@ -4,20 +4,10 @@ import Spinner from "@components/common/Spinner/Spinner";
 import Banner from "@components/home/Banner/Banner";
 import Row from "@components/home/Row/Row";
 import { useAuth } from "@hooks/useAuth";
-import { getMovies, Movie } from "@utils/api/getMovies";
+import { getMovies } from "@utils/api/getMovies";
 import type { GetServerSideProps, NextPage } from "next";
 import Head from "next/head";
-
-interface HomeProps {
-  netflixOriginals: Movie[];
-  trendingNow: Movie[];
-  topRated: Movie[];
-  actionMovies: Movie[];
-  comedyMovies: Movie[];
-  horrorMovies: Movie[];
-  romanceMovies: Movie[];
-  documentaries: Movie[];
-}
+import { HomeProps } from "src/types";
 
 const Home: NextPage<HomeProps> = ({
   netflixOriginals,

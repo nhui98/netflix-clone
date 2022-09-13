@@ -1,13 +1,9 @@
 import { NextPage } from "next";
-import { Movie } from "@utils/api/getMovies";
-import { AiOutlineLeft, AiOutlineRight } from "react-icons/ai";
-import Thumbnail from "../Thumbnail/Thumbnail";
 import { useRef, useState } from "react";
+import { AiOutlineLeft, AiOutlineRight } from "react-icons/ai";
+import { RowProps } from "src/types";
 
-export interface RowProps {
-  title: string;
-  movies: Movie[];
-}
+import Thumbnail from "../Thumbnail/Thumbnail";
 
 const Row: NextPage<RowProps> = ({ title, movies }) => {
   const rowRef = useRef<HTMLDivElement | null>(null);
