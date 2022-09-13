@@ -6,7 +6,7 @@ interface StoreState {
   showModal: boolean;
   setShowModal: (value: boolean) => void;
   currentMovie: Movie | null;
-  setCurrentMovie: (movie: Movie) => void;
+  setCurrentMovie: (movie: Movie | null) => void;
 }
 
 const useStore = create<StoreState>((set, get) => ({
