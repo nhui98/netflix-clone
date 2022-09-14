@@ -1,4 +1,3 @@
-import { useAuth } from "@hooks/useAuth";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { BsFillBellFill, BsSearch } from "react-icons/bs";
@@ -7,7 +6,6 @@ import { NAV_LINKS } from "./Header.data";
 
 export default function Header() {
   const [isScrolled, setScrolled] = useState(false);
-  const { logout } = useAuth();
 
   useEffect(() => {
     const handleScroll = () => {

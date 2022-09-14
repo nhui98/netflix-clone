@@ -5,13 +5,14 @@ import Spinner from "@components/common/Spinner/Spinner";
 import Banner from "@components/home/Banner/Banner";
 import Row from "@components/home/Row/Row";
 import { useAuth } from "@hooks/useAuth";
+import useList from "@hooks/useList";
 import useSubscription from "@hooks/useSubscription";
 import { payments } from "@lib/stripe/stripe";
 import { getProducts } from "@stripe/firestore-stripe-payments";
 import { getMovies } from "@utils/api/getMovies";
 import type { GetServerSideProps, NextPage } from "next";
 import Head from "next/head";
-import { HomeProps } from "src/types";
+import { HomeProps, Movie } from "src/types";
 
 const Home: NextPage<HomeProps> = ({
   netflixOriginals,
@@ -26,6 +27,7 @@ const Home: NextPage<HomeProps> = ({
 }) => {
   const { loading, user } = useAuth();
   const subscription = useSubscription(user);
+  const list = useList(user?.uid);
 
   if (loading || subscription === null) return <Spinner />;
 
@@ -45,6 +47,8 @@ const Home: NextPage<HomeProps> = ({
           <Row title="Trending" movies={trendingNow} />
           <Row title="Top Rated" movies={topRated} />
           <Row title="Action" movies={actionMovies} />
+          {/* my list */}
+          {list.length > 0 && <Row title="My List" movies={list as Movie[]} />}
           <Row title="Comedy" movies={comedyMovies} />
           <Row title="Horror" movies={horrorMovies} />
           <Row title="Romance" movies={romanceMovies} />

@@ -1,4 +1,5 @@
 import { Product } from "@stripe/firestore-stripe-payments";
+import { DocumentData } from "firebase/firestore";
 
 // Home types
 export interface HomeProps {

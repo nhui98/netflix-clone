@@ -1,12 +1,23 @@
+import { db } from "@firebase/firebase";
+import { useAuth } from "@hooks/useAuth";
 import { getMovie } from "@utils/api/getMovie";
 import useStore from "@zustand/store";
+import {
+  collection,
+  deleteDoc,
+  doc,
+  DocumentData,
+  onSnapshot,
+  setDoc,
+} from "firebase/firestore";
 import { useEffect, useRef, useState } from "react";
+import toast, { Toaster } from "react-hot-toast";
 import { AiOutlineClose } from "react-icons/ai";
 import { BsFillVolumeMuteFill, BsFillVolumeUpFill } from "react-icons/bs";
-import { FaPlay, FaPlus } from "react-icons/fa";
+import { FaCheckCircle, FaPlay, FaPlus } from "react-icons/fa";
 import { FiThumbsUp } from "react-icons/fi";
 import ReactPlayer from "react-player/lazy";
-import { Element, Genre } from "src/types";
+import { Element, Genre, Movie } from "src/types";
 
 const Modal = () => {
   const modalRef = useRef<HTMLDialogElement | null>(null);
@@ -17,6 +28,9 @@ const Modal = () => {
   const [trailer, setTrailer] = useState("");
   const [genres, setGenres] = useState<Genre[]>([]);
   const [muted, setMuted] = useState(true);
+  const [addedToList, setAddedToList] = useState(false);
+  const { user } = useAuth();
+  const [movies, setMovies] = useState<DocumentData[] | Movie[]>([]);
 
   useEffect(() => {
     const modal = modalRef.current;
@@ -56,6 +70,53 @@ const Modal = () => {
     fetchMovie();
   }, [movie]);
 
+  // Find all the movies in the user's list
+  useEffect(() => {
+    if (user) {
+      return onSnapshot(
+        collection(db, "customers", user.uid, "myList"),
+        (snapshot) => setMovies(snapshot.docs)
+      );
+    }
+  }, [movie?.id, user]);
+
+  // Check if the movie is already in the user's list
+  useEffect(
+    () =>
+      setAddedToList(
+        movies.findIndex((result) => result.data().id === movie?.id) !== -1
+      ),
+    [movies]
+  );
+
+  const handleList = async () => {
+    if (addedToList) {
+      if (!user || !movie) return;
+      await deleteDoc(
+        doc(db, "customers", user.uid, "myList", movie?.id.toString())
+      );
+
+      toast(
+        `${movie.title || movie.original_name} has been removed from my list`,
+        {
+          duration: 8000,
+        }
+      );
+    } else {
+      if (!user || !movie) return;
+      await setDoc(
+        doc(db, "customers", user.uid, "myList", movie.id.toString()),
+        {
+          ...movie,
+        }
+      );
+
+      toast(`${movie.title || movie.original_name} has been added to my list`, {
+        duration: 8000,
+      });
+    }
+  };
+
   const handleClose = () => {
     setShowModal(false);
   };
@@ -66,6 +127,7 @@ const Modal = () => {
       ref={modalRef}
       className="fixed top-7 left-0 right-0 z-50 mx-auto w-full max-w-5xl overflow-hidden overflow-y-scroll rounded-md bg-transparent backdrop:bg-black/90"
     >
+      <Toaster position="bottom-center" />
       <button
         onClick={handleClose}
         className="modalButton absolute right-5 top-5 !z-40 h-9 w-9 border-none bg-[#181818] hover:bg-[#181818]"
@@ -90,8 +152,12 @@ const Modal = () => {
               Play
             </button>
 
-            <button className="modalButton">
-              <FaPlus className="h-5 w-5 text-white" />
+            <button className="modalButton" onClick={handleList}>
+              {addedToList ? (
+                <FaCheckCircle className="h-5 w-5 text-white" />
+              ) : (
+                <FaPlus className="h-5 w-5 text-white" />
+              )}
             </button>
 
             <button className="modalButton">
