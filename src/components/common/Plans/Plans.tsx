@@ -29,7 +29,7 @@ const Plans: NextPage<PlansProps> = ({ products }) => {
     <div>
       <Head>
         <title>Netflix | Plans</title>
-        <meta name="description" content="Netflix home page" />
+        <meta name="description" content="Netflix plans page" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <header className="header border-b border-white/10 bg-[#141414]">

@@ -23,3 +23,20 @@ export const loadCheckout = async (priceId: string) => {
     if (error instanceof Error) console.error(error.message);
   }
 };
+
+export const goToBillingPortal = async () => {
+  const instance = getFunctions(app, "us-central1");
+
+  const functionRef = httpsCallable(
+    instance,
+    "ext-firestore-stripe-payments-createPortalLink"
+  );
+
+  try {
+    const { data } = (await functionRef({
+      returnUrl: `${window.location.origin}/account`,
+    })) as any;
+
+    window.location.assign(data.url);
+  } catch (error) {}
+};

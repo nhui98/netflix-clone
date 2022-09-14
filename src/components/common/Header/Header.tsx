@@ -1,4 +1,5 @@
 import { useAuth } from "@hooks/useAuth";
+import Link from "next/link";
 import { useEffect, useState } from "react";
 import { BsFillBellFill, BsSearch } from "react-icons/bs";
 
@@ -42,14 +43,14 @@ export default function Header() {
 
       <div className="flex items-center space-x-4 text-sm font-light">
         <BsSearch className="hidden h-6 w-6 cursor-pointer sm:inline" />
-        <p className="hidden cursor-pointer lg:inline">Kids</p>
         <BsFillBellFill className="h-6 w-6 cursor-pointer" />
-        <img
-          src="/avatar.png"
-          alt="avatar"
-          className="cursor-pointer rounded"
-          onClick={logout}
-        />
+        <Link href={`/account`}>
+          <img
+            src="/avatar.png"
+            alt="avatar"
+            className="cursor-pointer rounded"
+          />
+        </Link>
       </div>
     </header>
   );
