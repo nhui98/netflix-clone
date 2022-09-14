@@ -1,9 +1,13 @@
 import Header from "@components/common/Header/Header";
 import Modal from "@components/common/Modal/Modal";
+import Plans from "@components/common/Plans/Plans";
 import Spinner from "@components/common/Spinner/Spinner";
 import Banner from "@components/home/Banner/Banner";
 import Row from "@components/home/Row/Row";
 import { useAuth } from "@hooks/useAuth";
+import useSubscription from "@hooks/useSubscription";
+import { payments } from "@lib/stripe/stripe";
+import { getProducts } from "@stripe/firestore-stripe-payments";
 import { getMovies } from "@utils/api/getMovies";
 import type { GetServerSideProps, NextPage } from "next";
 import Head from "next/head";
@@ -18,10 +22,14 @@ const Home: NextPage<HomeProps> = ({
   horrorMovies,
   romanceMovies,
   documentaries,
+  products,
 }) => {
-  const { loading } = useAuth();
+  const { loading, user } = useAuth();
+  const subscription = useSubscription(user);
 
-  if (loading) return <Spinner />;
+  if (loading || subscription === null) return <Spinner />;
+
+  if (!subscription) return <Plans products={products} />;
 
   return (
     <div className="relative h-screen bg-gradient-to-b from-gray-900/10 to-[#010511] lg:h-[140vh]">
@@ -53,7 +61,12 @@ export default Home;
 export const getServerSideProps: GetServerSideProps = async () => {
   const movies = await getMovies();
 
+  const products = await getProducts(payments, {
+    includePrices: true,
+    activeOnly: true,
+  });
+
   return {
-    props: movies,
+    props: { ...movies, products },
   };
 };

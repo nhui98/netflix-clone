@@ -1,3 +1,5 @@
+import { Product } from "@stripe/firestore-stripe-payments";
+
 // Home types
 export interface HomeProps {
   netflixOriginals: Movie[];
@@ -8,6 +10,7 @@ export interface HomeProps {
   horrorMovies: Movie[];
   romanceMovies: Movie[];
   documentaries: Movie[];
+  products: Product[];
 }
 
 export interface BannerProps {
@@ -21,6 +24,10 @@ export interface RowProps {
 
 export interface ThumbnailProps {
   movie: Movie;
+}
+
+export interface PlansProps {
+  products: Product[];
 }
 
 // Authentication types

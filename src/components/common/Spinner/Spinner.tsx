@@ -7,3 +7,7 @@ export default function Spinner() {
     </div>
   );
 }
+
+export const Spinner2 = () => {
+  return <FaSpinner className="mx-auto animate-spin text-2xl" />;
+};
